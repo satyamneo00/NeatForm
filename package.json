@@ -1,0 +1,33 @@
+{
+  "name": "neat-forms",
+  "version": "1.0.4",
+  "description": "Create Forms on the fly, no need to write JSX, and manage states for validation. Just tell neat-form how many fields you want and what type, it will generate the form for you.",
+  "main": "dist/NeatForm.js",
+  "scripts": {
+    "build": "webpack --mode production"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/satyamneo00/NeatForm.git"
+  },
+  "keywords": [
+    "neat-form"
+  ],
+  "author": "Satyam Vashistha",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/satyamneo00/NeatForm/issues"
+  },
+  "homepage": "https://github.com/satyamneo00/NeatForm#readme",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.8",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.4.0",
+    "webpack": "^5.58.1",
+    "webpack-cli": "^4.9.0"
+  }
+}

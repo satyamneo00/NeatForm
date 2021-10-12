@@ -1,0 +1,101 @@
+.NFFormMain{
+    width: 60%;
+    margin-left:20%;
+    border: 1px solid #a3a3a3;
+    box-shadow: 0px 0px 5px 5px #777;
+    border-radius: 10px;
+    text-align: left;
+    background-color: #eeeeee;
+    margin-top:200px;
+    font-family: "Roboto", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #777;
+}
+.NFFormMain form{
+    width: 90%;
+    margin-left:5%;
+}
+.NFFormItem{
+    width: 100%;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.NFFormItem label{
+    color:#423f3f;
+    font-size:25px;
+    line-height: 1.5;
+}
+.NFFormItem input{
+    width: 100%;
+    border: 1px solid #ccc;
+    background: #FFF;
+    margin: 0 0 5px;
+    height: 20px;
+    border-radius: .5em;
+    padding: 10px;
+}
+.NFInputInvalid{
+    border: 1px solid #e96969 !important;
+    background-color: #fff2f2 !important;
+}
+.NFSubmit{
+    
+    cursor: pointer;
+    text-align: center;
+    display: block;
+    border: none;
+    background: #4CAF50;
+    color: #FFF;
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom:20px;
+}
+.NFSubmit:disabled{
+    background-color: gray;
+}
+
+select {
+    /* Reset Select */
+    appearance: none;
+    outline: 0;
+    border: 0;
+    box-shadow: none;
+    /* Personalize */
+    flex: 1;
+    padding: 0 1em;
+  
+    background-color: #fff;
+    background-image: none;
+    cursor: pointer;
+  }
+  /* Remove IE arrow */
+  select::-ms-expand {
+    display: none;
+  }
+  /* Custom Select wrapper */
+  .NFselect {
+    position: relative;
+    border: 1px solid #ccc;
+    display: flex;
+    width: 20em;
+    height: 30px;
+    height: 3em;
+    border-radius: .5em;
+    overflow: hidden;
+  }
+  /* Arrow */
+  .NFselect::after {
+    content: '\25BC';
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 1em;
+    background-color: #34495e;
+    transition: .25s all ease;
+    pointer-events: none;
+  }
+  /* Transition */
+  .NFselect:hover::after {
+    color: #fff;
+  }
