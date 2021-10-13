@@ -13,7 +13,7 @@ const NeatForm=props=>{
         if(!props.formAttr[i].required){
             isValid=true;
         }
-        formState.push({[props.formAttr[i].type.type]:isValid})
+        formState.push({[props.formAttr[i].name]:isValid})
     }
    })
 
@@ -44,10 +44,10 @@ const NeatForm=props=>{
     //changing the formState array based on the value passed by FormItem.
     const formValidateHandler=(input,isValid)=>{
         const index=formState.findIndex(i=>i.hasOwnProperty(input));
-        console.log(index)
+       
         formState[index][input]=isValid;
         setFormValidStates(formState)
-        console.log(formValidStates)  
+       
         checkIsFormValid();
     }
 
@@ -56,7 +56,7 @@ const NeatForm=props=>{
         for(const state of formValidStates){
             for(const input in state){
                 if(state[input]===false){
-                    console.log(state[input])
+                    
                     setIsFormValid(false);
                     return;
                 }
@@ -70,6 +70,7 @@ const NeatForm=props=>{
     return(
    
         <div className="NFFormMain">
+            <h1>Hello</h1>
             <form ref={formRef} onSubmit={formSubmitHandler}>
                 {props.formAttr.map(attr=>
                     <FormItem key={attr.name} formValidate={formValidateHandler}  attr={attr}/>

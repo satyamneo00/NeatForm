@@ -1,6 +1,6 @@
 {
   "name": "neat-forms",
-  "version": "1.0.4",
+  "version": "1.0.6",
   "description": "Create Forms on the fly, no need to write JSX, and manage states for validation. Just tell neat-form how many fields you want and what type, it will generate the form for you.",
   "main": "dist/NeatForm.js",
   "scripts": {
@@ -25,8 +25,11 @@
   },
   "devDependencies": {
     "@babel/core": "^7.15.8",
+    "@babel/preset-env": "^7.15.8",
+    "@babel/preset-react": "^7.14.5",
     "babel-loader": "^8.2.2",
     "css-loader": "^6.4.0",
+    "style-loader": "^3.3.0",
     "webpack": "^5.58.1",
     "webpack-cli": "^4.9.0"
   }

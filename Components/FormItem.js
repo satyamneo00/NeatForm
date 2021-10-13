@@ -62,26 +62,26 @@ const FormItem = props => {
         if(props.attr.required){
             if(input.value===''){
                 dispatch({type:'EMPTY',isValid:false,errorMessage:props.attr.errorMessage})
-                props.formValidate(props.attr.type.type,false);
+                props.formValidate(props.attr.name,false);
             }
             else{
                 dispatch({type:'EMPTY',isValid:true,errorMessage:''})
-                props.formValidate(props.attr.type.type,true);
+                props.formValidate(props.attr.name,true);
             }
             
         }
 
         //Email Validation
-         if(props.attr.type.type===InputType.email.type){
+         if(props.attr.type===InputType.email){
             if(props.attr.type.emailValidation){
                 if(!input.value.includes('@')){
                     dispatch({type:'EMAIL',isValid:false,errorMessage:props.attr.errorMessage});
-                    props.formValidate(props.attr.type.type,false);
+                    props.formValidate(props.attr.name,false);
                     
                 }
                 else{
                     dispatch({type:'EMAIL',isValid:true,errorMessage:''});
-                    props.formValidate(props.attr.type.type,true);
+                    props.formValidate(props.attr.name,true);
                 }
             }
             
@@ -89,44 +89,44 @@ const FormItem = props => {
         }
 
         // Password Validation
-         if(props.attr.type.type===InputType.password.type)
+         if(props.attr.type===InputType.password)
          {
             
-            if(!props.attr.type.regex.test(input.value)){
+            if(!props.attr.regex.test(input.value)){
                 dispatch({type:'PASSWORD',isValid:false,errorMessage:props.attr.errorMessage})
-                props.formValidate(props.attr.type.type,false);
+                props.formValidate(props.attr.name,false);
             }
             else{
                 console.log('in else');
                 dispatch({type:'PASSWORD',isValid:true,errorMessage:''})
                 
-                props.formValidate(props.attr.type.type,true);
+                props.formValidate(props.attr.name,true);
             }
         }
 
         //Number Validation
-         if(props.attr.type.type===InputType.number.type){
+         if(props.attr.type===InputType.number){
            
             if(isNaN(input.value)){
                 dispatch({type:'NUMBER',isValid:false,errorMessage:props.attr.errorMessage})
-                props.formValidate(props.attr.type.type,false);
+                props.formValidate(props.attr.name,false);
             }
             else{
                 dispatch({type:'NUMBER',isValid:true,errorMessage:''})
-                props.formValidate(props.attr.type.type,true);  
+                props.formValidate(props.attr.name,true);  
             }
         }
 
         //Dropdown Required Validation
-        if(props.attr.type.type===InputType.dropdown.type){
+        if(props.attr.type===InputType.dropdown){
             if(props.attr.required){
                 if(input.value==='Select'){
                     dispatch({type:'DROPDOWN',isValid:false,errorMessage:props.attr.errorMessage})
-                    props.formValidate(props.attr.type.type,false);
+                    props.formValidate(props.attr.name,false);
                 }
                 else{
                     dispatch({type:'DROPDOWN',isValid:true,errorMessage:props.attr.errorMessage})
-                    props.formValidate(props.attr.type.type,true);
+                    props.formValidate(props.attr.name,true);
                 }
             }
         }
@@ -176,11 +176,11 @@ const FormItem = props => {
 
     //Creating dropdown Component, will only be rendered if input type is dropdown
     const dropDown=()=>{
-        if(props.attr.type.type==='dropdown'){
+        if(props.attr.type===InputType.dropdown){
             return (
                 <div className="NFselect">
                 <select name={props.attr.name} key={props.attr.name} className={!input.isValid ? 'NFInputInvalid':undefined} onChange={inputChangeHandler} onBlur={inputBlurHandler} onFocus={inputFocusHandler} required={props.attr.required}>
-                    {props.attr.type.data.map((item)=>
+                    {props.attr.data.map((item)=>
                         <option  key={item.value} value={item.value}>{item.label}</option>
                     )}
                 </select>
@@ -197,10 +197,10 @@ const FormItem = props => {
                 props.attr.name
             }</label>
             <br/>
-            {props.attr.type.type==='dropdown' && 
+            {props.attr.type===InputType.dropdown && 
                 dropDown()
             }
-            {props.attr.type.type!=='dropdown' && <input  className={!input.isValid ? 'NFInputInvalid':undefined} onClick={inputClickHandler} onDoubleClick={inputDbClickHandler} 
+            {props.attr.type!==InputType.dropdown && <input  className={!input.isValid ? 'NFInputInvalid':undefined} onClick={inputClickHandler} onDoubleClick={inputDbClickHandler} 
             onFocus={inputFocusHandler} onBlur={inputBlurHandler} onChange={inputChangeHandler} onKeyDown={inputKeyDownHandler}
             onKeyUp={inputKeyUpHandler}
             key={props.attr.name}
@@ -208,7 +208,7 @@ const FormItem = props => {
                     props.attr.name
                 }
                 type={
-                    props.attr.type.type
+                    props.attr.type
                 }
                 placeholder={
                     props.attr.placeholder
