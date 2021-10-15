@@ -1,6 +1,6 @@
 {
   "name": "neat-forms",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "Create Forms on the fly, no need to write JSX, and manage states for validation. Just tell neat-form how many fields you want and what type, it will generate the form for you.",
   "main": "dist/NeatForm.js",
   "scripts": {

@@ -10,7 +10,7 @@ const NeatForm=props=>{
    useEffect(()=>{
     for(let i=0;i<props.formAttr.length;i++){
         let isValid=false;
-        if(!props.formAttr[i].required){
+        if(!props.formAttr[i].required || props.formAttr[i].type===InputType.radioGroup || props.formAttr[i].type===InputType.hidden){
             isValid=true;
         }
         formState.push({[props.formAttr[i].name]:isValid})
@@ -47,7 +47,7 @@ const NeatForm=props=>{
        
         formState[index][input]=isValid;
         setFormValidStates(formState)
-       
+         console.log(formState)
         checkIsFormValid();
     }
 
@@ -70,7 +70,6 @@ const NeatForm=props=>{
     return(
    
         <div className="NFFormMain">
-            <h1>Hello</h1>
             <form ref={formRef} onSubmit={formSubmitHandler}>
                 {props.formAttr.map(attr=>
                     <FormItem key={attr.name} formValidate={formValidateHandler}  attr={attr}/>

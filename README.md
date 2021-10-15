@@ -9,12 +9,23 @@ NeatForm currenty supports five field types:
 3. password
 4. number
 5. Select Option
+6. color
+7. file
+8. date
+9. datetime-local
+10. time
+11. radio group
+12. checkbox
+13. range
+14. month
+15. url
+16. week
+17. hidden
 
-Support for other input types such as Radio box and check box will be added in coming versions.
 
 <h2>How to use NeatForm?</h2>
 
-Using NeatForm is fairly simple, follow the step by step guide to create your NeatForm:
+Using NeatForm is fairly simple, follow the step by step guide to create your first NeatForm:
 
 <h3>Installing NeatForm</h3>
 
@@ -35,19 +46,20 @@ By creating an object of Input you create a new instance of Input field. Input c
 
 -> <b>name,type(from InputType object),value,placeholder,required(true/false),errorMessage</b> . More about InputType in Input Type section.
 
-Additionally Input object has a propery <b>domEvents</b>, regex and data, which you can use to pass different event handler functions. The list of events supported 
-is as follows:
-<b>onBlur
-onChange
-onFocus
-onClick
-onDoubleClick
-onKeyDown
-onKeyUp</b>
+Additionally Input object has a propery <b>domEvents</b> which you can use to pass different event handler functions. The list of events supported is as follows:
+
+1. onBlur
+2. onChange
+3. onFocus
+4. onClick
+5. onDoubleClick
+6. onKeyDown
+7. onKeyUp
 
 More about domEvent in 'Adding domEvents section'
 
-Regex and data will be covered in another section, they are not mandatory.
+Input has few more properties regex, data, minRange,maxRange,radioGroupData, they will be covered in relevant sections.
+
 
 <h4>Example</h4>
 
@@ -74,7 +86,18 @@ Shown in above code, we pass InputType.email or InputType.password in Input cons
 2. InputType.email
 3. InputType.password
 4. InputType.number
-5 InputType.dropdown (More in creating dropdown section)
+5. InputType.dropdown (More in creating dropdown section)
+6. InputType.checkbox
+7. InputType.color
+8. InputType.date
+9. InputType.datetimeLocal
+10. InputType.file
+11. InputType.radioGroup
+12. InputType.month
+13. InputType.range
+14. InputType.time
+15. InputType.url
+16. InputType.week
 
 
 <h3>Adding domEvents to Input</h3>
@@ -107,19 +130,40 @@ Please see the below code to understand how to add domEvents to input fields:
   dropdownField.data=[{label:'Apple',value:'Apple'}];
  ```
  
+<h3>Adding minRange and maxRange to input</h3>
+ 
+ these properties are only relevnant for range type input and also not a mandatory property.
+
+ ```
+   const rangeInput=new Input('Range',InputType.range,'','',false,'');
+    rangeInput.rangeMin=200;
+    rangeInput.rangeMax=500;
+ ```
+
+ <h3>Adding radioGroupData to input</h3>
+ 
+ Set this property to use radioGroup. See below example:
+
+ ```
+    const radioGroupInput=new Input('Gender',InputType.radioGroup,'','',true,'Required Field');
+    radioGroupInput.radioGroup.name='Gender'
+    radioGroupInput.radioGroup.values=['Male','Female'];
+ ```
+ 
+
  <h3>Adding input fields to Form Attributes</h3>
  
  Create an array as shown below
  
  ```
-  const formAttr=[inputField,passwordField,dropdownField]
+  const formAttr=[inputField,passwordField,dropdownField,........]
  ```
- 
+ Note: ..... is just representation that many more input fields can be added to the array.
  <h3>Rendering Neat Form</h3>
  
  ```
  return(
-        <NeatForm formAttr={formAttr} formSubmit={submitHandler}  submitValue='Login'/>
+        <NeatForm formAttr={formAttr} formSubmit={submitHandler}  submitValue='Save'/>
     )
   ```
   
@@ -143,6 +187,26 @@ Please see the below code to understand how to add domEvents to input fields:
 <NeatForm formAttr={formAttr} formSubmit={submitHandler}  submitValue='Login'/>
 ```
 
+formData will be in below format,just a javaScript object:
+
+```
+{Email: 'admin@admin.com', Password: 'kskdhkdh@1212', Fruit: 'Apple', Remember: '', Color: '#9d5353', …}
+Color: "#9d5353"
+DateTime: "2021-10-07T01:40"
+Email: "admin@admin.com"
+File: "C:\\fakepath\\bootstrap.css"
+Fruit: "Apple"
+Gender: "Female"
+Month: "2021-06"
+Password: "kskdhkdh@1212"
+Range: "436"
+Remember: ""
+Time: "01:42"
+URL: "https://google.com"
+date: "2021-10-07"
+hidden: "this is hidden value"
+[[Prototype]]: Object
+```
 <h3>Passing submitValue prop</h3>
 
 In the above code snippet we are pass submitValue prop, it is the text that you will see on submit button.
@@ -150,35 +214,69 @@ In the above code snippet we are pass submitValue prop, it is the text that you 
 
 <h3>Complete Code Example</h3>
 
-Refer to the below code example:
+Refer to the below code example, the below code example cover mostly all the types of input fields and their usage in neat-forms
 
 ```
+
 import NeatForm ,{Input,InputType} from 'neat-forms'
 const Test=()=>{
+    //creating email field
     const inputField=new Input('Email',InputType.email,'','Email',true,'Email is not Valid');
+    // passing domEvent onBlur to inputField
     inputField.domEvents.onBlur=(event)=>{
         console.log(event.target.value);
         
     }
     
-    
+    //creating passwordField
     const passwordField=new Input('Password',InputType.password,'','Password',true,'Password must be 6-16 characters long and must contain a number and a special character');
+    //adding regex to password
     passwordField.regex=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+
+    //creating dropdown field
     const dropdownField=new Input('Fruit',InputType.dropdown,'','',false,'You must select an item');
+
+    //adding data to dropdownfield
     dropdownField.data=[{label:'Apple',value:'Apple'}];
-    const formAttr=[inputField,passwordField,dropdownField]
+
+    //creating other fields
+    const checkBox=new Input('Remember',InputType.checkbox,'','',false,'');
+    const colorInput=new Input('Color',InputType.color,'','',false,'');
+    const dateInput=new Input('date',InputType.date,'','',false,'');
+    const dateTimeInput=new Input('DateTime',InputType.datetimeLocal,'','',true,'Required Field');
+    const timeInput=new Input('Time',InputType.time,'','',true,'Required Field');
+    const urlInput=new Input('URL',InputType.url,'','',false,'');
+    const fileInput=new Input('File',InputType.file,'','',false,'');
+    const monthInput=new Input('Month',InputType.month,'','',false,'');
+    //range field
+    const rangeInput=new Input('Range',InputType.range,'','',false,'');
+    //adding range
+    rangeInput.rangeMin=200;
+    rangeInput.rangeMax=500;
+
+    //radioGroup
+    const radioGroupInput=new Input('Gender',InputType.radioGroup,'','',true,'Required Field');
+    //setting radioGroupData properties..
+    radioGroupInput.radioGroupData.name='Gender'
+    radioGroupInput.radioGroupData.values=['Male','Female'];
+
+    //hidden field
+    const hiddenInput=new Input('hidden',InputType.hidden,'this is hidden value','',false,'');
+
+    const formAttr=[inputField,passwordField,dropdownField,checkBox,colorInput,dateInput,dateTimeInput,timeInput,urlInput,fileInput,monthInput,rangeInput,radioGroupInput,hiddenInput]
     
     const submitHandler=(formData)=>{
         console.log(formData);
     }
    
     return(
-        <NeatForm formAttr={formAttr} formSubmit={submitHandler}  submitValue='Login'/>
+        <NeatForm formAttr={formAttr} formSubmit={submitHandler}  submitValue='Save'/>
     )
 }
 export default Test;
-```
 
+```
+Note: It is recommended that you use unique name for each Input field as names are passed as keys in input and they should be unique.
 <h3>Output</h3>
 
 The above code will generate a form with three fields and the Login button will be disabled by default, because few fields are required.
@@ -200,11 +298,14 @@ List of classes used in NeatForm are:
 - NFInputInvalid : use this to modify invalid field css.
 - NFSubmit: use to modify submit button.
 
-You can always refer to Developer tools to find nested elements and updated the css accordingly.
+You can always refer to Developer tools or GitHub  and update the css accordingly in your own project.
 
 
-I hope you enjoy using NeatForm and it makes your life easy. In case you face any issue, feel free to raise and issue or email me @ satyam.neo@outlook.com
+I hope you enjoy using NeatForm and it makes your life easy. In case you face any issue, feel free to raise an issue or email me @ satyam.neo@outlook.com
 
+Also if you feel like we could add something to neat-forms, please feel free to drop your suggestions.
+
+Namaste _/\_
 
 
 

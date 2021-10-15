@@ -1,5 +1,6 @@
 import {  useReducer } from 'react';
 import { InputType } from '../Helper/InputType';
+import { getRadioGroup } from './getRadioGroup';
 import './NeatForm.css'
 
 //Reducer Function for managing Input state.
@@ -174,6 +175,7 @@ const FormItem = props => {
     }
 
 
+
     //Creating dropdown Component, will only be rendered if input type is dropdown
     const dropDown=()=>{
         if(props.attr.type===InputType.dropdown){
@@ -193,14 +195,19 @@ const FormItem = props => {
     //returns the FormItem Component.
     return (
         <div className="NFFormItem">
-            <label>{
+            {props.attr.type!==InputType.hidden && <label>{
                 props.attr.name
-            }</label>
+            }</label>}
             <br/>
             {props.attr.type===InputType.dropdown && 
                 dropDown()
             }
-            {props.attr.type!==InputType.dropdown && <input  className={!input.isValid ? 'NFInputInvalid':undefined} onClick={inputClickHandler} onDoubleClick={inputDbClickHandler} 
+            {props.attr.type===InputType.radioGroup && 
+                getRadioGroup(props.attr
+                    )
+            }
+            {props.attr.type===InputType.range && <span>{input.value}</span>}
+            {props.attr.type!==InputType.dropdown && props.attr.type!==InputType.radioGroup && <input  className={!input.isValid ? 'NFInputInvalid':undefined} onClick={inputClickHandler} onDoubleClick={inputDbClickHandler} 
             onFocus={inputFocusHandler} onBlur={inputBlurHandler} onChange={inputChangeHandler} onKeyDown={inputKeyDownHandler}
             onKeyUp={inputKeyUpHandler}
             key={props.attr.name}
@@ -216,6 +223,10 @@ const FormItem = props => {
                 value={
                     input.value
                 }
+                
+                min={props.attr.rangeMin}
+                max={props.attr.rangeMax}
+                
                 required={
                     props.attr.required
                 }/>}

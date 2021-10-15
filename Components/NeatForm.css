@@ -35,6 +35,15 @@
     border-radius: .5em;
     padding: 10px;
 }
+.NFFormItem input[type="checkbox"],
+.NFFormItem input[type="radio"]{
+  margin: 0px;
+  width: auto;
+}
+.NFFormItem input[type="color"]{
+  margin: 0px;
+  width: auto;
+}
 .NFInputInvalid{
     border: 1px solid #e96969 !important;
     background-color: #fff2f2 !important;
@@ -98,4 +107,7 @@ select {
   /* Transition */
   .NFselect:hover::after {
     color: #fff;
+  }
+  .radiotext{
+    font-size: medium;
   }

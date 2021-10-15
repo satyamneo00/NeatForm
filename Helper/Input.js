@@ -12,6 +12,12 @@ export function Input(name,type,value,placeholder,required,errorMessage){
         }
     ];
     this.regex=/^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+    this.rangeMin=0;
+    this.rangeMax=100;
+    this.radioGroupData={
+        name:'',
+        values:[]
+    }
     this.domEvents={
         onBlur:null,
         onChange:null,

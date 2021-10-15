@@ -3,5 +3,17 @@ export const InputType={
     email:'email',
     password:'password',
     number:'number',
-    dropdown:'dropdown'   
+    dropdown:'dropdown',
+    checkbox:'checkbox',
+    color:'color',
+    date:'date',
+    datetimeLocal:'datetime-local',
+    file:'file',
+    hidden:'hidden',
+    radioGroup:'radio',
+    month:'month',
+    range:'range',
+    time:'time',
+    url:'url',
+    week:'week'
 }
