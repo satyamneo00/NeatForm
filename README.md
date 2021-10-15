@@ -305,7 +305,7 @@ I hope you enjoy using NeatForm and it makes your life easy. In case you face an
 
 Also if you feel like we could add something to neat-forms, please feel free to drop your suggestions.
 
-Namaste _/\\_
+Namaste _ /\ _
 
 
 
